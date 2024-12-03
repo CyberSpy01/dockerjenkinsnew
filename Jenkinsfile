@@ -1,9 +1,11 @@
+
+
 pipeline {
     agent any
 
     environment {
         GIT_REPOSITORY_URL = 'https://github.com/CyberSpy01/dockerjenkinsnew.git'
-        DOCKER_IMAGE_NAME = 'ketanrehpade/docker_jenkins_demo'
+        DOCKER_IMAGE_NAME = 'ketanrehpade/docker_jenkins_demo1'
         IMAGE_TAG = '1.0'
     }
 
@@ -43,7 +45,7 @@ pipeline {
                                                          passwordVariable: 'Docker@7177')]) {
                             // Explicit login before push
                             sh """
-                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
                             docker push ${DOCKER_IMAGE_NAME}:${IMAGE_TAG}
                             """
                         }
@@ -56,4 +58,5 @@ pipeline {
         }
     }
 }
+
 
